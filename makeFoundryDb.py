@@ -39,12 +39,11 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
                 },
                 "type": "armor",
                 "useConsumableForAttack": "",
-                "isPowered": false
-            },
+                "isPowered": False            },
             "effects": [],
             "flags": {
                 "twodsix": {
-                    "newItem": true
+                    "newItem": True
                 },
                 "core": {
                     "sourceId": "Item.kHeev9TUmoxCl1uD"
@@ -58,7 +57,7 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
                 "modifiedTime": 1681494395684,
                 "lastModifiedBy": "OK9YthkIIxCpCkT0"
             },
-            "folder": null,
+            "folder": "",
             "sort": 0,
             "ownership": {
                 "default": 0,
@@ -67,14 +66,16 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
             "_id": "bmMpPYi1MEHTx7mh"
         }
         outputRecord['img'] = "icons/svg/item-bag.svg"
+        outputRecord['system']['folder'] = None
         outputRecord['name'] = csvData['name']
-        outputRecord['system']['techLevel'] = csvData['techlevel']
-        outputRecord['system']['quantity'] = csvData['quantity']
-        outputRecord['system']['wieght'] = csvData['weight']
-        outputRecord['system']['price'] = csvData['price']
-        outputRecord['system']['armor'] = csvData['armor']
-        outputRecord['system']['secondaryArmor']['value'] = csvData['secondary']
-        outputRecord['system']['radiationProtection']['value'] = csvData['radiation']
+        outputRecord['system']['name'] = csvData['name']
+        outputRecord['system']['techLevel'] = int(csvData['techlevel'])
+        outputRecord['system']['quantity'] = int(csvData['quantity'])
+        outputRecord['system']['wieght'] = int(csvData['weight'])
+        outputRecord['system']['price'] = int(csvData['price'])
+        outputRecord['system']['armor'] = int(csvData['armor'])
+        outputRecord['system']['secondaryArmor']['value'] = int(csvData['secondary'])
+        outputRecord['system']['radiationProtection']['value'] = int(csvData['radiation'])
         for t in csvData['secondarytypes'].split(":"):
             outputRecord['system']['secondaryArmor']['protectionTypes'].append(t)
         return outputRecord
@@ -105,7 +106,7 @@ def main ():
                 with open(f, newline='') as csvfile:
                     csvInput = csv.DictReader(csvfile)
                     for row in csvInput:
-                        dbFile.write(makeOutputRecord(row, 'armor'))
+                        dbFile.write(json.loads(makeOutputRecord(row, 'armor')))
         if f.name == weaponFile+inputSuffix:
             # process as wepon
             print(f"processing weapon file {f.name}")
