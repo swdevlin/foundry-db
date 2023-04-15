@@ -1,6 +1,13 @@
 import csv
 import json
 from pathlib import Path
+import secrets
+
+# import random
+# import string   
+
+# def id_generator(size=16, chars=string.ascii_uppercase + string.digits):
+#         return ''.join(random.choice(chars) for _ in range(size))   
 
 def setDbRecord(type:str)->dict:
     record = {
@@ -51,7 +58,7 @@ def setDbRecord(type:str)->dict:
             "default": 0,
             "OK9YthkIIxCpCkT0": 3
         },
-        "_id": "JMVP1GTuRWbeR9Uh"
+        "_id": ""
     }
     if type == "armor":
         record['type'] = 'armor'
@@ -91,6 +98,7 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
     if type == 'armor':
         # process as armor
         outputRecord = setDbRecord(type)
+        outputRecord["_id"] = secrets.token_hex(16)
         outputRecord['img'] = "icons/svg/item-bag.svg"
         outputRecord['system']['folder'] = None
         outputRecord['name'] = csvData['name']+" ("+csvData['techlevel']+")"
