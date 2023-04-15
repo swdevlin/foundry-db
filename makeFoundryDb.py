@@ -3,67 +3,111 @@ import json
 from pathlib import Path
 
 def setDbRecord(type:str)->dict:
-    if type == "armor":
-        record = {
+    record = {
+        "name": "",
+        "type": "",
+        "img": "",
+        "system": {
             "name": "",
-            "type": "armor",
-            "img": "",
-            "system": {
-                "name": "",
-                "techLevel": 0,
-                "description": "Armor",
-                "shortdescr": "Armor",
-                "quantity": 1,
-                "weight": 1,
-                "price": 0,
-                "traits": [],
-                "consumables": [],
-                "skillModifier": 0,
-                "skill": "",
-                "associatedSkillName": "",
-                "equipped": "",
-                "docReference": "",
-                "pdfReference": {
-                    "type": "",
-                    "href": "",
-                    "label": ""
-                },
-                "armor": 0,
-                "secondaryArmor": {
-                    "value": 0,
-                    "protectionTypes": []
-                },
-                "radiationProtection": {
-                    "value": 0
-                },
-                "type": "armor",
-                "useConsumableForAttack": "",
-                "isPowered": False            },
-            "effects": [],
-            "flags": {
-                "twodsix": {
-                    "newItem": True
-                },
-                "core": {
-                    "sourceId": "Item.kHeev9TUmoxCl1uD"
-                }
+            "techLevel": 0,
+            "description": "",
+            "shortdescr": "",
+            "quantity": 0,
+            "weight": 0,
+            "price": 0,
+            "traits": [],
+            "consumables": [],
+            "skillModifier": 0,
+            "skill": "",
+            "associatedSkillName": "",
+            "equipped": "",
+            "docReference": "",
+            "pdfReference": {
+                "type": "",
+                "href": "",
+                "label": ""
             },
-            "_stats": {
-                "systemId": "twodsix",
-                "systemVersion": "2.27.3",
-                "coreVersion": "10.291",
-                "createdTime": 1681494327937,
-                "modifiedTime": 1681494395684,
-                "lastModifiedBy": "OK9YthkIIxCpCkT0"
+            "target": {
+                "value": None,
+                "width": None,
+                "units": "m",
+                "type": "none"
             },
-            "folder": "",
-            "sort": 0,
-            "ownership": {
-                "default": 0,
-                "OK9YthkIIxCpCkT0": 3
+            "range": "0",
+            "damage": "",
+            "damageBonus": 0,
+            "magazineSize": 0,
+            "ammo": "100",
+            "useConsumableForAttack": "",
+            "magazineCost": 0,
+            "type": "weapon",
+            "lawLevel": 0,
+            "rangeBand": "",
+            "weaponType": "",
+            "damageType": "NONE",
+            "rateOfFire": "1",
+            "recoil": False,
+            "features": "",
+            "armorPiercing": 0,
+            "handlingModifiers": ""
+        },
+        "effects": [],
+        "flags": {
+            "twodsix": {
+                "newItem": True
             },
-            "_id": "bmMpPYi1MEHTx7mh"
+            "core": {
+                "sourceId": "Item.viNh0N8Fw28bpV2e"
+            }
+        },
+        "_stats": {
+            "systemId": "twodsix",
+            "systemVersion": "2.27.3",
+            "coreVersion": "10.291",
+            "createdTime": 1681493070337,
+            "modifiedTime": 1681493265527,
+            "lastModifiedBy": "OK9YthkIIxCpCkT0"
+        },
+        "folder": None,
+        "sort": 0,
+        "ownership": {
+            "default": 0,
+            "OK9YthkIIxCpCkT0": 3
+        },
+        "_id": "JMVP1GTuRWbeR9Uh"
+    }
+    if type == "armor":
+        record['type'] = 'armor'
+        record['system']['armor'] = 0
+        record['system']['secondaryArmor']['value'] = 0
+        record['system']['secondaryArmor']['protectionTypes'] = []
+        record['system']['radiationProtection']['value'] = 0
+    if type == "weapon":
+        record['type'] = 'weapons'
+        record['system']['armor'] = 0
+        record['system']['secondaryArmor']['value'] = 0
+        record['system']['secondaryArmor']['protectionTypes'] = []
+        record['system']['radiationProtection']['value'] = 0
+        record['system']['target'] = {
+            "value": None,
+            "width": None,
+            "units": "m",
+            "type": "none"
         }
+        record['system']['range'] = "0"
+        record['system']['damage'] = "0"
+        record['system']['damageBonus'] = 0
+        record['system']['magazineSize'] = 0
+        record['system']['ammo'] = "0"
+        record['system']['lawLevel'] = 0
+        record['system']['magazineCost'] = 0
+        record['system']['rangeBand'] = ""
+        record['system']['weaponType'] = ""
+        record['system']['damageType'] = ""
+        record['system']['rateOfFire'] = "1"
+        record['system']['recoil'] = False
+        record['system']['armorPiercing'] = 0
+        record['system']['handlingModifiers'] = ""
     return record
 
 def makeOutputRecord(csvData:dict, type:str)->dict:
