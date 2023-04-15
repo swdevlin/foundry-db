@@ -108,12 +108,13 @@ def main ():
     for f in listInputFiles:
         if f.name == armorFile+inputSuffix:
             # process as armor
-            print(f"processing armor file {f.name}")
+            print(f"Start processing armor file {f.name}")
             with open(Path(outputFolder, foundryPrefix+armorFile+outputSuffix), 'w') as dbFile:
                 with open(f, newline='') as csvfile:
                     csvInput = csv.DictReader(csvfile)
                     for row in csvInput:
-                        dbFile.write(json.dumps(makeOutputRecord(row, 'armor')))
+                        dbFile.write(json.dumps(makeOutputRecord(row, 'armor'))+"\n")
+            print(f"Complete processing armor file {f.name}")
         if f.name == weaponFile+inputSuffix:
             # process as wepon
             print(f"processing weapon file {f.name}")
