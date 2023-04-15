@@ -1,0 +1,61 @@
+{
+    "name": "Ballistic vest",
+    "type": "armor",
+    "img": "icons/svg/item-bag.svg",
+    "system": {
+        "name": "",
+        "techLevel": 8,
+        "description": "A flexible and relatively light flak jacket intended to be worn semi-discreetly.&nbsp;<span style=\"color: var(--s2d6-light-color); font-family: inherit; font-size: inherit; text-align: inherit;\">It is still fairly obviously armour but can be concealed under a light jacket,&nbsp;</span><span style=\"color: var(--s2d6-light-color); font-family: inherit; font-size: inherit; text-align: inherit;\">whereas a flak jacket is much more blatant.</span>",
+        "shortdescr": "",
+        "quantity": 1,
+        "weight": 1,
+        "price": 500,
+        "traits": [],
+        "consumables": [],
+        "skillModifier": 0,
+        "skill": "",
+        "associatedSkillName": "",
+        "equipped": "backpack",
+        "docReference": "",
+        "pdfReference": {
+            "type": "",
+            "href": "",
+            "label": ""
+        },
+        "armor": 4,
+        "secondaryArmor": {
+            "value": 0,
+            "protectionTypes": []
+        },
+        "radiationProtection": {
+            "value": 0
+        },
+        "type": "armor",
+        "useConsumableForAttack": "",
+        "isPowered": false
+    },
+    "effects": [],
+    "flags": {
+        "twodsix": {
+            "newItem": true
+        },
+        "core": {
+            "sourceId": "Item.kHeev9TUmoxCl1uD"
+        }
+    },
+    "_stats": {
+        "systemId": "twodsix",
+        "systemVersion": "2.27.3",
+        "coreVersion": "10.291",
+        "createdTime": 1681494327937,
+        "modifiedTime": 1681494395684,
+        "lastModifiedBy": "OK9YthkIIxCpCkT0"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0,
+        "OK9YthkIIxCpCkT0": 3
+    },
+    "_id": "bmMpPYi1MEHTx7mh"
+}
