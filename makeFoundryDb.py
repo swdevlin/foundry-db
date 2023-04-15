@@ -27,29 +27,6 @@ def setDbRecord(type:str)->dict:
                 "href": "",
                 "label": ""
             },
-            "target": {
-                "value": None,
-                "width": None,
-                "units": "m",
-                "type": "none"
-            },
-            "range": "0",
-            "damage": "",
-            "damageBonus": 0,
-            "magazineSize": 0,
-            "ammo": "100",
-            "useConsumableForAttack": "",
-            "magazineCost": 0,
-            "type": "weapon",
-            "lawLevel": 0,
-            "rangeBand": "",
-            "weaponType": "",
-            "damageType": "NONE",
-            "rateOfFire": "1",
-            "recoil": False,
-            "features": "",
-            "armorPiercing": 0,
-            "handlingModifiers": ""
         },
         "effects": [],
         "flags": {
@@ -79,15 +56,15 @@ def setDbRecord(type:str)->dict:
     if type == "armor":
         record['type'] = 'armor'
         record['system']['armor'] = 0
-        record['system']['secondaryArmor']['value'] = 0
-        record['system']['secondaryArmor']['protectionTypes'] = []
-        record['system']['radiationProtection']['value'] = 0
+        record['system']['secondaryArmor'] = {
+            'value': 0,
+            'protectionTypes': []
+        }
+        record['system']['radiationProtection'] = {
+            'value': 0
+        }
     if type == "weapon":
         record['type'] = 'weapons'
-        record['system']['armor'] = 0
-        record['system']['secondaryArmor']['value'] = 0
-        record['system']['secondaryArmor']['protectionTypes'] = []
-        record['system']['radiationProtection']['value'] = 0
         record['system']['target'] = {
             "value": None,
             "width": None,
