@@ -71,10 +71,10 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
         outputRecord['system']['name'] = csvData['name']
         outputRecord['system']['techLevel'] = int(csvData['techlevel'])
         outputRecord['system']['quantity'] = int(csvData['quantity'])
-        outputRecord['system']['wieght'] = int(csvData['weight'])
+        outputRecord['system']['weight'] = int(csvData['weight'])
         outputRecord['system']['price'] = int(csvData['price'])
         outputRecord['system']['armor'] = int(csvData['armor'])
-        outputRecord['system']['secondaryArmor']['value'] = int(csvData['secondary'])
+        outputRecord['system']['secondaryArmor']['value'] = int(csvData['secondaryarmor'])
         outputRecord['system']['radiationProtection']['value'] = int(csvData['radiation'])
         for t in csvData['secondarytypes'].split(":"):
             outputRecord['system']['secondaryArmor']['protectionTypes'].append(t)
@@ -106,7 +106,7 @@ def main ():
                 with open(f, newline='') as csvfile:
                     csvInput = csv.DictReader(csvfile)
                     for row in csvInput:
-                        dbFile.write(json.loads(makeOutputRecord(row, 'armor')))
+                        dbFile.write(json.dumps(makeOutputRecord(row, 'armor')))
         if f.name == weaponFile+inputSuffix:
             # process as wepon
             print(f"processing weapon file {f.name}")
