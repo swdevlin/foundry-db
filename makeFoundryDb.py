@@ -13,7 +13,7 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
                 "name": "",
                 "techLevel": 0,
                 "description": "Armor",
-                "shortdescr": "",
+                "shortdescr": "Armor",
                 "quantity": 1,
                 "weight": 1,
                 "price": 0,
@@ -67,8 +67,13 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
         }
         outputRecord['img'] = "icons/svg/item-bag.svg"
         outputRecord['system']['folder'] = None
-        outputRecord['name'] = csvData['name']
+        outputRecord['name'] = csvData['name']+" ("+csvData['techlevel']+")"
         outputRecord['system']['name'] = csvData['name']
+        if csvData['shortdescription']:
+            outputRecord['system']['shortdescr'] = csvData['shortdescription']
+        if csvData['description']:
+            outputRecord['system']['description'] = csvData['description']
+        outputRecord['system']['skill'] = csvData['skill']
         outputRecord['system']['techLevel'] = int(csvData['techlevel'])
         outputRecord['system']['quantity'] = int(csvData['quantity'])
         outputRecord['system']['weight'] = int(csvData['weight'])
