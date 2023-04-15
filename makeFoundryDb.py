@@ -2,10 +2,9 @@ import csv
 import json
 from pathlib import Path
 
-def makeOutputRecord(csvData:dict, type:str)->dict:
-    if type == 'armor':
-        # process as armor
-        outputRecord = {
+def setDbRecord(type:str)->dict:
+    if type == "armor":
+        record = {
             "name": "",
             "type": "armor",
             "img": "",
@@ -65,6 +64,12 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
             },
             "_id": "bmMpPYi1MEHTx7mh"
         }
+    return record
+
+def makeOutputRecord(csvData:dict, type:str)->dict:
+    if type == 'armor':
+        # process as armor
+        outputRecord = setDbRecord(type)
         outputRecord['img'] = "icons/svg/item-bag.svg"
         outputRecord['system']['folder'] = None
         outputRecord['name'] = csvData['name']+" ("+csvData['techlevel']+")"
