@@ -79,10 +79,12 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
         outputRecord['system']['weight'] = int(csvData['weight'])
         outputRecord['system']['price'] = int(csvData['price'])
         outputRecord['system']['armor'] = int(csvData['armor'])
-        outputRecord['system']['secondaryArmor']['value'] = int(csvData['secondaryarmor'])
-        outputRecord['system']['radiationProtection']['value'] = int(csvData['radiation'])
-        for t in csvData['secondarytypes'].split(":"):
-            outputRecord['system']['secondaryArmor']['protectionTypes'].append(t)
+        if csvData['secondaryarmor'] != '':
+            outputRecord['system']['secondaryArmor']['value'] = int(csvData['secondaryarmor'])
+            for t in csvData['secondarytypes'].split(":"):
+                outputRecord['system']['secondaryArmor']['protectionTypes'].append(t)
+        if csvData['radiation'] != '':
+            outputRecord['system']['radiationProtection']['value'] = int(csvData['radiation'])
         return outputRecord
     else:
         print(f"{type} type not yet supported")
