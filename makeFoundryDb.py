@@ -165,23 +165,24 @@ def makeOutputRecord(csvData:dict, type:str, folders:dict)->dict:
     # set base field values
     outputRecord = setDbRecord(type)
     outputRecord["_id"] = secrets.token_hex(8)
-
+    
     # first check for a folder
-    if csvData['folder'] != 'none':
-        # we want to put this record into a folder
-        # does the folder already exist?
-        if csvData['folder'] in folders:
-            # pull the record so we can add this id to the contents
-            recordFolder = folders[csvData['folder']]
-            recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
-            # push update back into folders
-            folders[csvData['folder']] = recordFolder
-        else:
-            # new record - make the folder
-            recordFolder = makeFolder(csvData['folder'])
-            recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
-            # push update back into folders
-            folders[csvData['folder']] = recordFolder
+    # folder dict struct is type array containing name pointing to folder record
+
+    # folders are disabled
+
+    # if csvData['folder'] != 'none':
+    #     # we want to put this record into a folder
+    #     # does the folder already exist?
+    #     if csvData['folder'] in folders[type]:
+    #         # pull the record so we can add this id to the contents
+    #         folders[type][csvData['folder']]['flags']['cf']['contents'].append(outputRecord['_id'])
+    #     else:
+    #         # new record - make the folder
+    #         recordFolder = makeFolder(csvData['folder'])
+    #         recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
+    #         # push update back into folders
+    #         folders[type][csvData['folder']] = recordFolder
 
     outputRecord['img'] = imgRoot+csvData['image']
     outputRecord['system']['folder'] = None
