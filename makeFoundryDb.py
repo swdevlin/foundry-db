@@ -162,46 +162,47 @@ def makeFolder(folderName:str)->dict:
 
 def makeOutputRecord(csvData:dict, type:str, folders:dict)->dict:
     imgRoot = 'systems/twodsix/assets/icons/'
-    if type == 'armor':
-        # process as armor
-        # get/set the armor for the record so we can use it in the folder
-        outputRecord = setDbRecord(type)
-        outputRecord["_id"] = secrets.token_hex(8)
+    # set base field values
+    outputRecord = setDbRecord(type)
+    outputRecord["_id"] = secrets.token_hex(8)
 
-        # first check for a folder
-        if csvData['folder'] != 'none':
-            # we want to put this record into a folder
-            # does the folder already exist?
-            if csvData['folder'] in folders:
-                # pull the record so we can add this id to the contents
-                recordFolder = folders[csvData['folder']]
-                recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
-                # push update back into folders
-                folders[csvData['folder']] = recordFolder
-            else:
-                # new record - make the folder
-                recordFolder = makeFolder(csvData['folder'])
-                recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
-                # push update back into folders
-                folders[csvData['folder']] = recordFolder
-
-        outputRecord['img'] = imgRoot+csvData['image']
-        outputRecord['system']['folder'] = None
-        if int(csvData['techlevel']) < 10:
-            suffixTL = " (TL  "+csvData['techlevel']+")"
+    # first check for a folder
+    if csvData['folder'] != 'none':
+        # we want to put this record into a folder
+        # does the folder already exist?
+        if csvData['folder'] in folders:
+            # pull the record so we can add this id to the contents
+            recordFolder = folders[csvData['folder']]
+            recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
+            # push update back into folders
+            folders[csvData['folder']] = recordFolder
         else:
-            suffixTL = " (TL "+csvData['techlevel']+")"
-        outputRecord['name'] = csvData['name']+" (TL "+csvData['techlevel']+")"
-        outputRecord['system']['name'] = csvData['name']
-        if csvData['shortdescription']:
-            outputRecord['system']['shortdescr'] = csvData['shortdescription']
-        if csvData['description']:
-            outputRecord['system']['description'] = csvData['description']
-        outputRecord['system']['skill'] = csvData['skill']
-        outputRecord['system']['techLevel'] = int(csvData['techlevel'])
-        outputRecord['system']['quantity'] = int(csvData['quantity'])
-        outputRecord['system']['weight'] = int(csvData['weight'])
-        outputRecord['system']['price'] = int(csvData['price'])
+            # new record - make the folder
+            recordFolder = makeFolder(csvData['folder'])
+            recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
+            # push update back into folders
+            folders[csvData['folder']] = recordFolder
+
+    outputRecord['img'] = imgRoot+csvData['image']
+    outputRecord['system']['folder'] = None
+    if int(csvData['techlevel']) < 10:
+        suffixTL = " (TL  "+csvData['techlevel']+")"
+    else:
+        suffixTL = " (TL "+csvData['techlevel']+")"
+    outputRecord['name'] = csvData['name']+" (TL "+csvData['techlevel']+")"
+    outputRecord['system']['name'] = csvData['name']
+    if csvData['shortdescription']:
+        outputRecord['system']['shortdescr'] = csvData['shortdescription']
+    if csvData['description']:
+        outputRecord['system']['description'] = csvData['description']
+    outputRecord['system']['skill'] = csvData['skill']
+    outputRecord['system']['techLevel'] = int(csvData['techlevel'])
+    outputRecord['system']['quantity'] = int(csvData['quantity'])
+    outputRecord['system']['weight'] = int(csvData['weight'])
+    outputRecord['system']['price'] = int(csvData['price'])
+
+    if type == 'armor':
+        # insert custom bits for this type
         outputRecord['system']['armor'] = int(csvData['armor'])
         if csvData['secondaryarmor'] != '':
             outputRecord['system']['secondaryArmor']['value'] = int(csvData['secondaryarmor'])
@@ -209,11 +210,26 @@ def makeOutputRecord(csvData:dict, type:str, folders:dict)->dict:
                 outputRecord['system']['secondaryArmor']['protectionTypes'].append(t)
         if csvData['radiation'] != '':
             outputRecord['system']['radiationProtection']['value'] = int(csvData['radiation'])
-        return (outputRecord, folders)
     else:
-        print(f"{type} type not yet supported")
-        return {}
-
+        if type == 'weapon':
+            # insert custom bits for this type
+            outputRecord['system']['range'] = csvData['range']
+            outputRecord['system']['damage'] = csvData['damage']
+            outputRecord['system']['damageBonus'] = int(csvData['damagebonus'])
+            outputRecord['system']['magazineSize'] = int(csvData['magsize'])
+            outputRecord['system']['ammo'] = csvData['ammo']
+            outputRecord['system']['lawLevel'] = int(csvData['lawlevel'])
+            outputRecord['system']['magazineCost'] = int(csvData['magcost'])
+            outputRecord['system']['rangeBand'] = csvData['rangeband']
+            outputRecord['system']['weaponType'] = csvData['weapontype']
+            outputRecord['system']['damageType'] = csvData['damagetype']
+            outputRecord['system']['rateOfFire'] = csvData['rateoffire']
+            outputRecord['system']['recoil'] = csvData['recoil']
+            outputRecord['system']['armorPiercing'] = int(csvData['armorpen'])
+            outputRecord['system']['handlingModifiers'] = csvData['handlingmod']
+        else:
+            print(f"{type} type not yet supported")
+    return (outputRecord, folders)
 
 def main ():
     inputFolder = "input"
