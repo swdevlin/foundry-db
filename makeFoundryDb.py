@@ -98,7 +98,7 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
     if type == 'armor':
         # process as armor
         outputRecord = setDbRecord(type)
-        outputRecord["_id"] = secrets.token_hex(16)
+        outputRecord["_id"] = secrets.token_hex(8)
         outputRecord['img'] = "icons/svg/item-bag.svg"
         outputRecord['system']['folder'] = None
         outputRecord['name'] = csvData['name']+" ("+csvData['techlevel']+")"
