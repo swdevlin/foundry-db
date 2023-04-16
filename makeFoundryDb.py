@@ -111,7 +111,7 @@ def makeFolder(folderName:str)->dict:
                 "children": []
             },
             "twodsix": {
-                "newItem": true
+                "newItem": True
             }
         },
         "img": "icons/svg/item-bag.svg",
@@ -174,13 +174,13 @@ def makeOutputRecord(csvData:dict, type:str, folders:dict)->dict:
             if csvData['folder'] in folders:
                 # pull the record so we can add this id to the contents
                 recordFolder = folders[csvData['folder']]
-                recordFolder['contents'].append(outputRecord['_id'])
+                recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
                 # push update back into folders
                 folders[csvData['folder']] = recordFolder
             else:
                 # new record - make the folder
                 recordFolder = makeFolder(csvData['folder'])
-                recordFolder['contents'].append(outputRecord['_id'])
+                recordFolder['flags']['cf']['contents'].append(outputRecord['_id'])
                 # push update back into folders
                 folders[csvData['folder']] = recordFolder
 
@@ -239,8 +239,8 @@ def main ():
                         (recordtoWrite, dictFolders) = makeOutputRecord(row, 'armor', dictFolders)
                         dbFile.write(json.dumps(recordtoWrite)+"\n")
                 # output the folder lines
-                for f in dictFolders:
-                    dbFile.write(json.dumps(f)+"\n")
+                for dir in dictFolders:
+                    dbFile.write(json.dumps(dictFolders[dir])+"\n")
 
             print(f"Complete processing armor file {f.name}")
         if f.name == weaponFile+inputSuffix:
