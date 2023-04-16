@@ -94,12 +94,96 @@ def setDbRecord(type:str)->dict:
         record['system']['handlingModifiers'] = ""
     return record
 
-def makeOutputRecord(csvData:dict, type:str, listFolders:list)->dict:
+def makeFolder(folderName:str)->dict:
+    folder = {
+        "name": "#[CF_tempEntity]",
+        "type": "equipment",
+        "flags": {
+            "cf": {
+                "id": "temp_npp4um2ywu",
+                "name": "",
+                "color": "#000000",
+                "fontColor": "#FFFFFF",
+                "icon": "",
+                "sorting": "a",
+                "contents": [
+                ],
+                "children": []
+            },
+            "twodsix": {
+                "newItem": true
+            }
+        },
+        "img": "icons/svg/item-bag.svg",
+        "system": {
+            "name": "",
+            "techLevel": 0,
+            "description": "",
+            "shortdescr": "",
+            "quantity": 1,
+            "weight": 0,
+            "price": "",
+            "traits": [],
+            "consumables": [],
+            "skillModifier": 0,
+            "skill": "",
+            "associatedSkillName": "",
+            "equipped": "backpack",
+            "docReference": "",
+            "pdfReference": {
+                "type": "",
+                "href": "",
+                "label": ""
+            },
+            "type": "equipment",
+            "useConsumableForAttack": ""
+        },
+        "effects": [],
+        "folder": None,
+        "sort": 0,
+        "ownership": {
+            "default": 0,
+            "ciibqOqESKGj7NAB": 3
+        },
+        "_stats": {
+            "systemId": "twodsix",
+            "systemVersion": "2.27.3",
+            "coreVersion": "10.291",
+            "createdTime": 1681607177109,
+            "modifiedTime": 1681607186985,
+            "lastModifiedBy": "ciibqOqESKGj7NAB"
+        },
+        "_id": ""
+    }
+    folder['flags']['cf']['name'] = folderName
+    folder['_id'] = secrets.token_hex(8)
+    return folder
+
+def makeOutputRecord(csvData:dict, type:str, folders:dict)->dict:
     imgRoot = 'systems/twodsix/assets/icons/'
     if type == 'armor':
         # process as armor
+        # get/set the armor for the record so we can use it in the folder
         outputRecord = setDbRecord(type)
         outputRecord["_id"] = secrets.token_hex(8)
+
+        # first check for a folder
+        if csvData['folder'] != 'none':
+            # we want to put this record into a folder
+            # does the folder already exist?
+            if csvData['folder'] in folders:
+                # pull the record so we can add this id to the contents
+                recordFolder = folders[csvData['folder']]
+                recordFolder['contents'].append(outputRecord['_id'])
+                # push update back into folders
+                folders[csvData['folder']] = recordFolder
+            else:
+                # new record - make the folder
+                recordFolder = makeFolder(csvData['folder'])
+                recordFolder['contents'].append(outputRecord['_id'])
+                # push update back into folders
+                folders[csvData['folder']] = recordFolder
+
         outputRecord['img'] = imgRoot+csvData['image']
         outputRecord['system']['folder'] = None
         if int(csvData['techlevel']) < 10:
@@ -124,7 +208,7 @@ def makeOutputRecord(csvData:dict, type:str, listFolders:list)->dict:
                 outputRecord['system']['secondaryArmor']['protectionTypes'].append(t)
         if csvData['radiation'] != '':
             outputRecord['system']['radiationProtection']['value'] = int(csvData['radiation'])
-        return outputRecord
+        return (outputRecord, folders)
     else:
         print(f"{type} type not yet supported")
         return {}
@@ -143,7 +227,7 @@ def main ():
 
     inputPath = Path('./'+inputFolder)
     listInputFiles = list(inputPath.glob('*'+inputSuffix))
-    listFolders = []
+    dictFolders = {}
     for f in listInputFiles:
         if f.name == armorFile+inputSuffix:
             # process as armor
@@ -152,7 +236,12 @@ def main ():
                 with open(f, newline='') as csvfile:
                     csvInput = csv.DictReader(csvfile)
                     for row in csvInput:
-                        dbFile.write(json.dumps(makeOutputRecord(row, 'armor', listFolders))+"\n")
+                        (recordtoWrite, dictFolders) = makeOutputRecord(row, 'armor', dictFolders)
+                        dbFile.write(json.dumps(recordtoWrite)+"\n")
+                # output the folder lines
+                for f in dictFolders:
+                    dbFile.write(json.dumps(f)+"\n")
+
             print(f"Complete processing armor file {f.name}")
         if f.name == weaponFile+inputSuffix:
             # process as wepon
