@@ -94,7 +94,7 @@ def setDbRecord(type:str)->dict:
         record['system']['handlingModifiers'] = ""
     return record
 
-def makeOutputRecord(csvData:dict, type:str)->dict:
+def makeOutputRecord(csvData:dict, type:str, listFolders:list)->dict:
     imgRoot = 'systems/twodsix/assets/icons/'
     if type == 'armor':
         # process as armor
@@ -102,6 +102,10 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
         outputRecord["_id"] = secrets.token_hex(8)
         outputRecord['img'] = imgRoot+csvData['image']
         outputRecord['system']['folder'] = None
+        if int(csvData['techlevel']) < 10:
+            suffixTL = " (TL  "+csvData['techlevel']+")"
+        else:
+            suffixTL = " (TL "+csvData['techlevel']+")"
         outputRecord['name'] = csvData['name']+" (TL "+csvData['techlevel']+")"
         outputRecord['system']['name'] = csvData['name']
         if csvData['shortdescription']:
@@ -139,7 +143,7 @@ def main ():
 
     inputPath = Path('./'+inputFolder)
     listInputFiles = list(inputPath.glob('*'+inputSuffix))
-    print(listInputFiles)
+    listFolders = []
     for f in listInputFiles:
         if f.name == armorFile+inputSuffix:
             # process as armor
@@ -148,17 +152,17 @@ def main ():
                 with open(f, newline='') as csvfile:
                     csvInput = csv.DictReader(csvfile)
                     for row in csvInput:
-                        dbFile.write(json.dumps(makeOutputRecord(row, 'armor'))+"\n")
+                        dbFile.write(json.dumps(makeOutputRecord(row, 'armor', listFolders))+"\n")
             print(f"Complete processing armor file {f.name}")
         if f.name == weaponFile+inputSuffix:
             # process as wepon
-            print(f"processing weapon file {f.name}")
+            print(f"Start processing weapon file {f.name}")
         if f.name == itemFile+inputSuffix:
             # process as item
-            print(f"processing item file {f.name}")
+            print(f"Start processing item file {f.name}")
         if f.name == ammoFile+inputSuffix:
             # process as ammo
-            print(f"processing ammo file {f.name}")
+            print(f"Start processing ammo file {f.name}")
     return True
 
 if __name__ == "__main__":
