@@ -258,11 +258,20 @@ def main ():
                 # output the folder lines
                 for dir in dictFolders:
                     dbFile.write(json.dumps(dictFolders[dir])+"\n")
-
             print(f"Complete processing armor file {f.name}")
         if f.name == weaponFile+inputSuffix:
             # process as wepon
             print(f"Start processing weapon file {f.name}")
+            with open(Path(outputFolder, foundryPrefix+weaponFile+outputSuffix), 'w') as dbFile:
+                with open(f, newline='') as csvfile:
+                    csvInput = csv.DictReader(csvfile)
+                    for row in csvInput:
+                        (recordtoWrite, dictFolders) = makeOutputRecord(row, 'weapon', dictFolders)
+                        dbFile.write(json.dumps(recordtoWrite)+"\n")
+                # output the folder lines
+                for dir in dictFolders:
+                    dbFile.write(json.dumps(dictFolders[dir])+"\n")
+            print(f"Complete processing weapon file {f.name}")
         if f.name == itemFile+inputSuffix:
             # process as item
             print(f"Start processing item file {f.name}")
