@@ -225,7 +225,10 @@ def makeOutputRecord(csvData:dict, type:str, folders:dict)->dict:
             outputRecord['system']['weaponType'] = csvData['weapontype']
             outputRecord['system']['damageType'] = csvData['damagetype']
             outputRecord['system']['rateOfFire'] = csvData['rateoffire']
-            outputRecord['system']['recoil'] = csvData['recoil']
+            if csvData['recoil'] == "TRUE":
+                outputRecord['system']['recoil'] = True
+            else:
+                outputRecord['system']['recoil'] = False
             outputRecord['system']['armorPiercing'] = int(csvData['armorpen'])
             outputRecord['system']['handlingModifiers'] = csvData['handlingmod']
         else:
