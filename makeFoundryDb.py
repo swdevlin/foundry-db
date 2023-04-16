@@ -101,7 +101,7 @@ def makeOutputRecord(csvData:dict, type:str)->dict:
         outputRecord["_id"] = secrets.token_hex(8)
         outputRecord['img'] = "icons/svg/item-bag.svg"
         outputRecord['system']['folder'] = None
-        outputRecord['name'] = csvData['name']+" ("+csvData['techlevel']+")"
+        outputRecord['name'] = csvData['name']+" (TL "+csvData['techlevel']+")"
         outputRecord['system']['name'] = csvData['name']
         if csvData['shortdescription']:
             outputRecord['system']['shortdescr'] = csvData['shortdescription']
