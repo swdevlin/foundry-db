@@ -95,11 +95,12 @@ def setDbRecord(type:str)->dict:
     return record
 
 def makeOutputRecord(csvData:dict, type:str)->dict:
+    imgRoot = 'systems/twodsix/assets/icons/'
     if type == 'armor':
         # process as armor
         outputRecord = setDbRecord(type)
         outputRecord["_id"] = secrets.token_hex(8)
-        outputRecord['img'] = "icons/svg/item-bag.svg"
+        outputRecord['img'] = imgRoot+csvData['image']
         outputRecord['system']['folder'] = None
         outputRecord['name'] = csvData['name']+" (TL "+csvData['techlevel']+")"
         outputRecord['system']['name'] = csvData['name']

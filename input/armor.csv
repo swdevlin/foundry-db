@@ -1,22 +1,22 @@
-name,armor,techlevel,radiation,weight,quantity,price,skill,secondaryarmor,secondarytypes,shortdescription,description
-Jack,1,1,0,1,1,50,None,,,Jack,Jack Armor
-Mesh,2,6,0,2,1,50,None,,,Mesh,Mesh Armor
-Cloth,5,7,0,10,1,250,None,,,Cloth,Cloth Armor
-Cloth,8,10,0,5,1,500,None,,,Cloth,Cloth Armor
-Flak Jacket,3,7,0,8,1,100,None,,,Flak Jacket,Flak Jacket Armor
-Flak Jacket,5,8,0,6,1,300,None,,,Flak Jacket,Flak Jacket Armor
-Reflec,0,10,0,1,1,1500,None,10,Lasers,Reflec,Reflec Armor
-Ablat,1,9,0,2,1,75,None,6,Lasers,Ablat,Ablat Armor
-Combat Armor,13,10,85,20,1,96000,Vacc Suit 1,,,Combat Armor,Combat Armor Armor
-Combat Armor,17,12,145,16,1,88000,Vacc Suit 0,,,Combat Armor,Combat Armor Armor
-Combat Armor,19,14,180,12,1,160000,Vacc Suit 0,,,Combat Armor,Combat Armor Armor
-Vacc Suit,4,8,10,17,1,12000,Vacc Suit 1,,,Vacc Suit,Vacc Suit Armor
-Vacc Suit,8,10,60,10,1,11000,Vacc Suit 0,,,Vacc Suit,Vacc Suit Armor
-Vacc Suit,10,12,90,8,1,20000,Vacc Suit 0,,,Vacc Suit,Vacc Suit Armor
-Hostile Environment Vacc Suit,8,9,75,22,1,24000,Vacc Suit 1,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor
-Hostile Environment Vacc Suit,9,10,90,13,1,20000,Vacc Suit 1,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor
-Hostile Environment Vacc Suit,12,11,140,13,1,22000,Vacc Suit 0,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor
-Hostile Environment Vacc Suit,14,13,170,10,1,40000,Vacc Suit 0,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor
-Hostile Environment Vacc Suit,15,14,185,9,1,60000,Vacc Suit 0,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor
-Battle Dress,22,13,245,100,1,200000,Vacc Suit 2,,,Battle Dress,Battle Dress Armor
-Battle Dress,25,14,290,100,1,220000,Vacc Suit 1,,,Battle Dress,Battle Dress Armor
+name,armor,techlevel,radiation,weight,quantity,price,skill,secondaryarmor,secondarytypes,shortdescription,description,image
+Jack,1,1,0,1,1,50,None,,,Jack,Jack Armor,jack.svg
+Mesh,2,6,0,2,1,50,None,,,Mesh,Mesh Armor,mesh.svg
+Cloth,5,7,0,10,1,250,None,,,Cloth,Cloth Armor,cloth.svg
+Cloth,8,10,0,5,1,500,None,,,Cloth,Cloth Armor,cloth.svg
+Flak Jacket,3,7,0,8,1,100,None,,,Flak Jacket,Flak Jacket Armor,breastplate.svg
+Flak Jacket,5,8,0,6,1,300,None,,,Flak Jacket,Flak Jacket Armor,breastplate.svg
+Reflec,0,10,0,1,1,1500,None,10,Lasers,Reflec,Reflec Armor,reflec.svg
+Ablat,1,9,0,2,1,75,None,6,Lasers,Ablat,Ablat Armor,ablat.svg
+Combat Armor,13,10,85,20,1,96000,Vacc Suit 1,,,Combat Armor,Combat Armor Armor,Combat-armor.svg
+Combat Armor,17,12,145,16,1,88000,Vacc Suit 0,,,Combat Armor,Combat Armor Armor,Combat-armor.svg
+Combat Armor,19,14,180,12,1,160000,Vacc Suit 0,,,Combat Armor,Combat Armor Armor,Combat-armor.svg
+Vacc Suit,4,8,10,17,1,12000,Vacc Suit 1,,,Vacc Suit,Vacc Suit Armor,vacc-suit.svg
+Vacc Suit,8,10,60,10,1,11000,Vacc Suit 0,,,Vacc Suit,Vacc Suit Armor,vacc-suit.svg
+Vacc Suit,10,12,90,8,1,20000,Vacc Suit 0,,,Vacc Suit,Vacc Suit Armor,vacc-suit.svg
+Hostile Environment Vacc Suit,8,9,75,22,1,24000,Vacc Suit 1,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor,hostile-environment-vacc-suit.svg
+Hostile Environment Vacc Suit,9,10,90,13,1,20000,Vacc Suit 1,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor,hostile-environment-vacc-suit.svg
+Hostile Environment Vacc Suit,12,11,140,13,1,22000,Vacc Suit 0,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor,hostile-environment-vacc-suit.svg
+Hostile Environment Vacc Suit,14,13,170,10,1,40000,Vacc Suit 0,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor,hostile-environment-vacc-suit.svg
+Hostile Environment Vacc Suit,15,14,185,9,1,60000,Vacc Suit 0,,,Hostile Environment Vacc Suit,Hostile Environment Vacc Suit Armor,hostile-environment-vacc-suit.svg
+Battle Dress,22,13,245,100,1,200000,Vacc Suit 2,,,Battle Dress,Battle Dress Armor,battle-dress.svg
+Battle Dress,25,14,290,100,1,220000,Vacc Suit 1,,,Battle Dress,Battle Dress Armor,battle-dress.svg
