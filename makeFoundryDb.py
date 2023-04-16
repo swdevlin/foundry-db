@@ -100,7 +100,7 @@ def makeFolder(folderName:str)->dict:
         "type": "equipment",
         "flags": {
             "cf": {
-                "id": "temp_npp4um2ywu",
+                "id": "",
                 "name": "",
                 "color": "#000000",
                 "fontColor": "#FFFFFF",
@@ -156,6 +156,7 @@ def makeFolder(folderName:str)->dict:
         "_id": ""
     }
     folder['flags']['cf']['name'] = folderName
+    folder['flags']['cf']['id'] = secrets.token_hex(8)
     folder['_id'] = secrets.token_hex(8)
     return folder
 
