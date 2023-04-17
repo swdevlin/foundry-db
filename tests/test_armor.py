@@ -1,6 +1,6 @@
 import unittest
 
-from armor_parser import parse_armor, parse_secondary
+from parsers.armor import parse, parse_secondary
 
 
 class TestArmorParser(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestArmorParser(unittest.TestCase):
             'Cr15000',
             'None'
         ]
-        tokens = parse_armor(line)
+        tokens = parse(line)
         self.assertEqual(expected, tokens)
 
     def test_alternate(self):
@@ -33,7 +33,7 @@ class TestArmorParser(unittest.TestCase):
             'Cr75',
             'None'
         ]
-        tokens = parse_armor(line)
+        tokens = parse(line)
         self.assertEqual(expected, tokens)
 
     def test_psi(self):
@@ -49,7 +49,7 @@ class TestArmorParser(unittest.TestCase):
             'Cr500000',
             'None'
         ]
-        tokens = parse_armor(line)
+        tokens = parse(line)
         self.assertEqual(expected, tokens)
 
     def test_secondary(self):

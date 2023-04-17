@@ -12,7 +12,7 @@ def parse_secondary(text):
     return tokens[0], tokens[1]
 
 
-def parse_armor(line):
+def parse(line):
     plus_split = line.split('+', 1)
     name = plus_split[0]
     specs = plus_split[1]
@@ -26,3 +26,17 @@ def parse_armor(line):
     tokens = specs.split(' ')
     tokens = tokens[:1] + [secondary_protection, secondary_protection_type] + tokens[1:]
     return [name.strip()] + tokens
+
+
+def columns():
+    return [
+        'Armour Type',
+        'Protection',
+        'Secondary',
+        'Secondary Type',
+        'TL',
+        'Rad',
+        'Kg',
+        'Cost',
+        'Required Skill'
+    ]
