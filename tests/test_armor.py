@@ -52,6 +52,22 @@ class TestArmorParser(unittest.TestCase):
         tokens = parse(line)
         self.assertEqual(expected, tokens)
 
+    def test_skill(self):
+        line = 'Ceramic Combat Armour +12 (+18 vs. fire, lasers and energy) 13 150 15 Cr300000 Vacc Suit 1'
+        expected = [
+            'Ceramic Combat Armour',
+            '12',
+            '18',
+            'fire, lasers and energy',
+            '13',
+            '150',
+            '15',
+            'Cr300000',
+            'Vacc Suit 1'
+        ]
+        tokens = parse(line)
+        self.assertEqual(expected, tokens)
+
     def test_secondary(self):
         line = '+6 vs. lasers'
         expected = (

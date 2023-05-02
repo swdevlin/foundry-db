@@ -12,7 +12,7 @@ def parse_secondary(text):
     return tokens[0], tokens[1]
 
 
-def parse(line):
+def parse(line, count=8):
     plus_split = line.split('+', 1)
     name = plus_split[0]
     specs = plus_split[1]
@@ -25,7 +25,8 @@ def parse(line):
         secondary_protection, secondary_protection_type = parse_secondary(secondary)
     tokens = specs.split(' ')
     tokens = tokens[:1] + [secondary_protection, secondary_protection_type] + tokens[1:]
-    return [name.strip()] + tokens
+    tokens = [name.strip()] + tokens
+    return tokens[:count] + [' '.join(tokens[count:])]
 
 
 def columns():

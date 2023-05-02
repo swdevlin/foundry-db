@@ -2,8 +2,7 @@ from parsers import armor
 
 
 def parse(line):
-    tokens = armor.parse(line)
-    tokens = tokens[:-3] + [' '.join(tokens[-3:])]
+    tokens = armor.parse(line, 11)
     return tokens
 
 
