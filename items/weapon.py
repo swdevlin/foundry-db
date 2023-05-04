@@ -4,6 +4,10 @@ from items.helpers import timestamp, tl_in_name, cost
 from items.icon_mapper import determine_icon
 
 
+def convert_damage(text):
+    return text.replace('D', 'd6')
+
+
 def parse_traits(text):
     traits = {
         'ap': 0,
@@ -64,7 +68,7 @@ def create_item(record):
                 "type": "none" if traits['blast'] is None else "radius"
             },
             "range": record['Range'],
-            "damage": record['Damage'],
+            "damage": convert_damage(record['Damage']),
             "damageBonus": 0,
             "magazineSize": record['Magazine'],
             "ammo": record['Magazine'],

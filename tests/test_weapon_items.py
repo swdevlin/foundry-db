@@ -1,6 +1,6 @@
 import unittest
 
-from items.weapon import parse_traits
+from items.weapon import parse_traits, convert_damage
 
 
 class TestWeaponItem(unittest.TestCase):
@@ -39,10 +39,10 @@ class TestWeaponItem(unittest.TestCase):
         self.assertIsNone(traits['auto'])
 
         traits = parse_traits('Auto 4')
-        self.assertEqual(traits['auto'], 4)
+        self.assertEqual(traits['auto'], "1/4")
 
         traits = parse_traits('auto 3, Fire')
-        self.assertTrue(traits['auto'], 3)
+        self.assertTrue(traits['auto'], "1/3")
 
     def test_traits(self):
         traits = parse_traits('Auto 3')
@@ -61,3 +61,15 @@ class TestWeaponItem(unittest.TestCase):
         traits = parse_traits('Blast 2')
         self.assertEqual(traits['blast'], 2)
 
+    def test_convert_damage(self):
+        text = '3D'
+        d = convert_damage(text)
+        self.assertEqual(d, '3d6')
+
+        text = '3D-3'
+        d = convert_damage(text)
+        self.assertEqual(d, '3d6-3')
+
+        text = '4'
+        d = convert_damage(text)
+        self.assertEqual(d, '4')
